@@ -26,7 +26,7 @@ public class ShiftsPrinterController {
 
     @FXML
     private void handlePrintButtonClick() {
-        String text = new PrintShifts().shiftPrinter(datePicker.getValue());
+        String text = new PrintShifts(datePicker.getValue()).shiftPrinter();
         // Add your existing code here to handle date parsing and printing shifts
         // You can use outputLabel.setText() to display the output
         textArea.setText(text);
