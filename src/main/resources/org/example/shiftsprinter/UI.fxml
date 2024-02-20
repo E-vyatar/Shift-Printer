@@ -9,6 +9,6 @@
     <children>
         <DatePicker fx:id="datePicker" layoutX="98.0" layoutY="59.0" />
         <TextArea fx:id="textArea" layoutX="111.0" layoutY="155.0" prefHeight="200.0" prefWidth="200.0" />
-        <Button fx:id="printButton" layoutX="352.0" layoutY="60.0" mnemonicParsing="false" text="Button" />
+        <Button fx:id="printButton" layoutX="352.0" layoutY="60.0" mnemonicParsing="false" onAction="#handlePrintButtonClick" text="Generate" />
     </children>
 </AnchorPane>
