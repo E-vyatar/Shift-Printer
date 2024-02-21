@@ -8,13 +8,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.shiftsprinter.ShiftsPrinterController">
-    <children>
-        <DatePicker fx:id="datePicker" layoutX="25.0" layoutY="25.0" prefHeight="26.0" prefWidth="200.0" />
-        <TextArea fx:id="shiftsTextArea" layoutX="354.0" layoutY="63.0" prefHeight="200.0" prefWidth="200.0" />
-        <Button fx:id="printButton" layoutX="243.0" layoutY="25.0" mnemonicParsing="false" onAction="#handlePrintButtonClick" text="Generate" />
-      <TextField fx:id="subjectTextField" layoutX="354.0" layoutY="25.0" prefHeight="26.0" prefWidth="200.0" />
-      <Slider fx:id="numDaysChooser" blockIncrement="1.0" layoutX="25.0" layoutY="63.0" majorTickUnit="1.0" max="0.0" minorTickCount="0" prefHeight="38.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-      <Label fx:id="sliderValue" layoutX="243.0" layoutY="69.0" prefHeight="26.0" prefWidth="61.0" />
-    </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.shiftsprinter.ShiftsPrinterController">
+    <DatePicker fx:id="datePicker" layoutX="25.0" layoutY="25.0" prefHeight="26.0" prefWidth="200.0"/>
+    <TextArea fx:id="shiftsTextArea" layoutX="354.0" layoutY="63.0" prefHeight="200.0" prefWidth="200.0"/>
+    <Button fx:id="printButton" layoutX="243.0" layoutY="25.0" mnemonicParsing="false"
+            onAction="#handlePrintButtonClick" text="Generate"/>
+    <TextField fx:id="subjectTextField" layoutX="354.0" layoutY="25.0" prefHeight="26.0" prefWidth="200.0"/>
+    <Slider fx:id="numDaysChooser" blockIncrement="1.0" layoutX="25.0" layoutY="63.0" majorTickUnit="1.0" max="0.0"
+            minorTickCount="0" prefHeight="38.0" prefWidth="200.0" showTickLabels="true" showTickMarks="true"
+            snapToTicks="true"/>
+    <Label fx:id="sliderValue" layoutX="243.0" layoutY="69.0" prefHeight="26.0" prefWidth="61.0"/>
 </AnchorPane>

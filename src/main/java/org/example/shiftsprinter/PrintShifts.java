@@ -58,4 +58,8 @@ public class PrintShifts {
     public String getShifts() {
         return shifts;
     }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
 }
