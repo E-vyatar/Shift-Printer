@@ -3,12 +3,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.shiftsprinter.ShiftsPrinterController">
     <children>
         <DatePicker fx:id="datePicker" layoutX="98.0" layoutY="59.0" />
-        <TextArea fx:id="textArea" layoutX="111.0" layoutY="155.0" prefHeight="200.0" prefWidth="200.0" />
+        <TextArea fx:id="shiftsTextArea" layoutX="111.0" layoutY="155.0" prefHeight="200.0" prefWidth="200.0" />
         <Button fx:id="printButton" layoutX="352.0" layoutY="60.0" mnemonicParsing="false" onAction="#handlePrintButtonClick" text="Generate" />
+      <TextField fx:id="subjectTextField" layoutX="111.0" layoutY="116.0" />
     </children>
 </AnchorPane>

@@ -3,20 +3,25 @@ package org.example.shiftsprinter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import java.time.LocalDate;
 
 public class ShiftsPrinterController {
     @FXML
-    private TextArea textArea;
+    private DatePicker datePicker;
 
     @FXML
     private Button printButton;
 
     @FXML
-    private DatePicker datePicker;
+    private TextField subjectTextField;
+
+    @FXML
+    private TextArea shiftsTextArea;
+
+
 
     @FXML
     private void initialize() {
@@ -26,9 +31,9 @@ public class ShiftsPrinterController {
 
     @FXML
     private void handlePrintButtonClick() {
-        String text = new PrintShifts(datePicker.getValue()).shiftPrinter();
-        // Add your existing code here to handle date parsing and printing shifts
-        // You can use outputLabel.setText() to display the output
-        textArea.setText(text);
+        PrintShifts printShifts = new PrintShifts(datePicker.getValue());
+        printShifts.generateText();
+        subjectTextField.setText(printShifts.getSubject());
+        shiftsTextArea.setText(printShifts.getShifts());
     }
 }
