@@ -1,17 +1,14 @@
 package org.example.shiftsprinter;
 
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.example.shiftsprinter.modules.DayDateTime;
+import org.example.shiftsprinter.modules.TimePickerSpinner;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class PrintShifts {
@@ -19,7 +16,7 @@ public class PrintShifts {
     private LocalDate localDate;
     private String subject;
     private String shifts;
-    private List<DayDateTime> shiftsList;
+    private final List<DayDateTime> shiftsList;
 
 
     public PrintShifts(LocalDate localDate) {
@@ -31,7 +28,7 @@ public class PrintShifts {
         StringBuilder subjectBuilder = new StringBuilder("Shifts Availability ");
         StringBuilder shiftsBuilder = new StringBuilder("Work around 32 hours a month.\n\n");
 
-        int numOfDays = 7;
+//        int numOfDays = 7;
 
         // date formats
         DateTimeFormatter formatterDayMonthDayOfWeek = DateTimeFormatter.ofPattern("dd/MM EEEE");
@@ -67,16 +64,16 @@ public class PrintShifts {
     }
 
     public void generateShifts(VBox vBox) {
-        LocalDate currentDate = null;
+        LocalDate currentDate;
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < vBox.getChildren().size(); i++) {
             currentDate = localDate.plusDays(i);
             HBox currentHBox = (HBox) vBox.getChildren().get(i);
 
-            TextField currentStart = (TextField) currentHBox.getChildren().get(1);
-            TextField currentEnd = (TextField) currentHBox.getChildren().get(3);
-            LocalTime startTime = LocalTime.parse(currentStart.getText());
-            LocalTime endTime = LocalTime.parse(currentEnd.getText());
+            TimePickerSpinner currentStart = (TimePickerSpinner) currentHBox.getChildren().get(1);
+            TimePickerSpinner currentEnd = (TimePickerSpinner) currentHBox.getChildren().get(3);
+            LocalTime startTime = LocalTime.parse(currentStart.getValue());
+            LocalTime endTime = LocalTime.parse(currentEnd.getValue());
 
             shiftsList.add(new DayDateTime(currentDate, startTime, endTime));
         }
