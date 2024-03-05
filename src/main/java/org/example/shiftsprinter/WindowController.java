@@ -3,6 +3,7 @@ package org.example.shiftsprinter;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.example.shiftsprinter.modules.TimePickerSpinner;
@@ -12,7 +13,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShiftsPrinterController {
+public class WindowController {
     @FXML
     private DatePicker datePicker;
 
@@ -20,7 +21,7 @@ public class ShiftsPrinterController {
     private Slider numDaysSlider;
 
     @FXML
-    private Label sliderValueLabel;
+    private TextField sliderValueTextField;
 
     @FXML
     private TextField subjectTextField;
@@ -35,22 +36,29 @@ public class ShiftsPrinterController {
     @FXML
     private void initialize() {
         datePicker.setValue(LocalDate.now());
-        sliderValueLabel.setText(String.valueOf(numDaysSlider.getValue()));
 
+        int SLIDER_MIN = 1;
+        int SLIDER_MAX = 30;
+        int SLIDER_VALUE = 7;
+        numDaysSlider.setMin(SLIDER_MIN);
+        numDaysSlider.setMax(SLIDER_MAX);
+        numDaysSlider.setValue(SLIDER_VALUE);
         // update label when slider value change
         numDaysSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            sliderValueLabel.setText(String.valueOf(newValue.intValue()));
+            sliderValueTextField.setText(String.valueOf(newValue.intValue()));
         });
 
-        // update slider when label value change
-        sliderValueLabel.setOnKeyTyped(event -> {
+        sliderValueTextField.setText(String.valueOf(SLIDER_VALUE));
+
+        // update slider when text field value change
+        sliderValueTextField.setOnKeyTyped(event -> {
             String eventText = event.getCharacter();
-            String labelValue = sliderValueLabel.getText();
+            String textFieldValue = sliderValueTextField.getText();
             if (!eventText.matches("\\d")) {
                 event.consume();
             } else {
-                labelValue += event.getCharacter();
-                int intValue = Integer.parseInt(labelValue);
+                textFieldValue += event.getCharacter();
+                int intValue = Integer.parseInt(textFieldValue);
                 if (intValue < 1 || intValue > 30) {
                     event.consume();
                 } else {
@@ -64,31 +72,16 @@ public class ShiftsPrinterController {
             timePickersVBox.getChildren().clear();
             timePickersVBox.getChildren().addAll(addHBoxers(x));
         });
-//        numDaysChooser.setOnDragDetected(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                var x = (int) numDaysChooser.getValue();
-//                timePickers.getChildren().clear();
-//                timePickers.getChildren().addAll(addHBoxers(x));
-//            }
-//        });
-
-        int SLIDER_MIN = 1;
-        int SLIDER_MAX = 30;
-        int SLIDER_VALUE = 7;
-        numDaysSlider.setMin(SLIDER_MIN);
-        numDaysSlider.setMax(SLIDER_MAX);
-        numDaysSlider.setValue(SLIDER_VALUE);
 
         timePickersVBox.getChildren().addAll(addHBoxers(SLIDER_VALUE));
     }
 
     @FXML
     private void handlePrintButtonClick() {
-        PrintShifts printShifts = new PrintShifts(datePicker.getValue());
-        printShifts.generateShifts(timePickersVBox);
-        subjectTextField.setText(printShifts.getSubject());
-        shiftsTextArea.setText(printShifts.getShifts());
+        InputProcessor inputProcessor = new InputProcessor(datePicker.getValue());
+        inputProcessor.generateShifts(timePickersVBox);
+        subjectTextField.setText(inputProcessor.getSubject());
+        shiftsTextArea.setText(inputProcessor.getShifts());
     }
 
     private HBox hBoxer() {

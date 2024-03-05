@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrintShifts {
+public class InputProcessor {
 
     private LocalDate localDate;
     private String subject;
@@ -19,7 +19,7 @@ public class PrintShifts {
     private final List<DayDateTime> shiftsList;
 
 
-    public PrintShifts(LocalDate localDate) {
+    public InputProcessor(LocalDate localDate) {
         this.localDate = localDate;
         shiftsList = new ArrayList<>();
     }
