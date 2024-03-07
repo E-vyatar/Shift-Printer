@@ -9,6 +9,7 @@ import org.example.shiftsprinter.modules.TimePickerSpinner;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class WindowController {
         numDaysSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             int sliderValue = (int) numDaysSlider.getValue();
             timePickersVBox.getChildren().clear();
-            timePickersVBox.getChildren().addAll(addHBoxers(sliderValue));
+            timePickersVBox.getChildren().addAll(generateHBoxers(sliderValue));
         });
 
         // text field
@@ -85,17 +86,26 @@ public class WindowController {
             numDaysSlider.setValue(Double.parseDouble(newValue));
         });
 
-        timePickersVBox.getChildren().addAll(addHBoxers(SLIDER_VALUE));
+        timePickersVBox.getChildren().addAll(generateHBoxers(SLIDER_VALUE));
     }
 
-    private HBox hBoxer() {
-        TimePickerSpinner tf1 = new TimePickerSpinner(LocalTime.of(9,0));
-        TimePickerSpinner tf2 = new TimePickerSpinner(LocalTime.of(22,0));
+    private HBox hBoxer(int offset) {
+        TimePickerSpinner timePickerSpinner1 = new TimePickerSpinner(LocalTime.of(9,0));
+        TimePickerSpinner timePickerSpinner2 = new TimePickerSpinner(LocalTime.of(22,0));
+
+        Label dateLabel = new Label(datePicker.getValue().plusDays(offset).format(DateTimeFormatter.ofPattern("dd/MM")));
+        Label startLabel = new Label("from:");
+        Label endLabel = new Label("until:");
+        dateLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        startLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        endLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+
         HBox hBox = new HBox(
-                new Label("from:"),
-                tf1,
-                new Label("until:"),
-                tf2
+                dateLabel,
+                startLabel,
+                timePickerSpinner1,
+                endLabel,
+                timePickerSpinner2
 
         );
         hBox.setSpacing(15);
@@ -104,11 +114,11 @@ public class WindowController {
         return hBox;
     }
 
-    private List<HBox> addHBoxers(int amount) {
+    private List<HBox> generateHBoxers(int amount) {
         List<HBox> res = new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
-            res.add(hBoxer());
+            res.add(hBoxer(i));
         }
 
         return res;

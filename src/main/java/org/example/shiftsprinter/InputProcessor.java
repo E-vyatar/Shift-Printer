@@ -24,25 +24,34 @@ public class InputProcessor {
         shiftsList = new ArrayList<>();
     }
 
+    public void generateShifts(VBox vBox) {
+        LocalDate currentDate;
+
+        for (int i = 0; i < vBox.getChildren().size(); i++) {
+            currentDate = localDate.plusDays(i);
+            HBox currentHBox = (HBox) vBox.getChildren().get(i);
+
+            TimePickerSpinner currentStart = (TimePickerSpinner) currentHBox.getChildren().get(2);
+            TimePickerSpinner currentEnd = (TimePickerSpinner) currentHBox.getChildren().get(4);
+            LocalTime startTime = LocalTime.parse(currentStart.getValue());
+            LocalTime endTime = LocalTime.parse(currentEnd.getValue());
+
+            shiftsList.add(new DayDateTime(currentDate, startTime, endTime));
+        }
+
+        generateText();
+    }
+
     public void generateText() {
         StringBuilder subjectBuilder = new StringBuilder("Shifts Availability ");
         StringBuilder shiftsBuilder = new StringBuilder("Work around 32 hours a month.\n\n");
 
-//        int numOfDays = 7;
-
         // date formats
-        DateTimeFormatter formatterDayMonthDayOfWeek = DateTimeFormatter.ofPattern("dd/MM EEEE");
         DateTimeFormatter formatterDayMonth = DateTimeFormatter.ofPattern("dd/MM");
         DateTimeFormatter formatterDay = DateTimeFormatter.ofPattern("dd");
 
         LocalDate currentDate = shiftsList.get(shiftsList.size() -1).getDate();
-        // Iterate through the next seven days and print the formatted date and day
-//        for (int i = 0; i < numOfDays; i++) {
-//            currentDate = localDate.plusDays(i);
-//            String currentDateFormatted = currentDate.format(formatterDayMonthDayOfWeek);
-//
-//            shiftsBuilder.append(currentDateFormatted).append(":\n");
-//        }
+
         for (DayDateTime dayDateTime : shiftsList) {
             shiftsBuilder.append(dayDateTime.toString()).append("\n");
         }
@@ -63,23 +72,7 @@ public class InputProcessor {
         shifts = shiftsBuilder.toString();
     }
 
-    public void generateShifts(VBox vBox) {
-        LocalDate currentDate;
 
-        for (int i = 0; i < vBox.getChildren().size(); i++) {
-            currentDate = localDate.plusDays(i);
-            HBox currentHBox = (HBox) vBox.getChildren().get(i);
-
-            TimePickerSpinner currentStart = (TimePickerSpinner) currentHBox.getChildren().get(1);
-            TimePickerSpinner currentEnd = (TimePickerSpinner) currentHBox.getChildren().get(3);
-            LocalTime startTime = LocalTime.parse(currentStart.getValue());
-            LocalTime endTime = LocalTime.parse(currentEnd.getValue());
-
-            shiftsList.add(new DayDateTime(currentDate, startTime, endTime));
-        }
-
-        generateText();
-    }
 
     public String getSubject() {
         return subject;
