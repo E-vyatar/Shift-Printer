@@ -25,10 +25,8 @@ public class InputProcessor {
     }
 
     public void generateShifts(VBox vBox) {
-        LocalDate currentDate;
 
         for (int i = 0; i < vBox.getChildren().size(); i++) {
-            currentDate = localDate.plusDays(i);
             HBox currentHBox = (HBox) vBox.getChildren().get(i);
 
             TimePickerSpinner currentStart = (TimePickerSpinner) currentHBox.getChildren().get(2);
@@ -36,7 +34,7 @@ public class InputProcessor {
             LocalTime startTime = LocalTime.parse(currentStart.getValue());
             LocalTime endTime = LocalTime.parse(currentEnd.getValue());
 
-            shiftsList.add(new DayDateTime(currentDate, startTime, endTime));
+            shiftsList.add(new DayDateTime(localDate.plusDays(i), startTime, endTime));
         }
 
         generateText();
