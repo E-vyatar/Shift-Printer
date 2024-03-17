@@ -39,6 +39,9 @@ public class WindowController {
     @FXML
     private void initialize() {
         datePicker.setValue(LocalDate.now());
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            updateTimePickers();
+        });
 
         generateButton.setOnAction(event -> {
             InputProcessor inputProcessor = new InputProcessor(datePicker.getValue());
@@ -61,9 +64,7 @@ public class WindowController {
         });
         // update number of time pickers when slider value change
         numDaysSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            int sliderValue = (int) numDaysSlider.getValue();
-            timePickersVBox.getChildren().clear();
-            timePickersVBox.getChildren().addAll(generateHBoxers(sliderValue));
+            updateTimePickers();
         });
 
         // text field
@@ -122,5 +123,11 @@ public class WindowController {
         }
 
         return res;
+    }
+
+    private void updateTimePickers() {
+        int sliderValue = (int) numDaysSlider.getValue();
+        timePickersVBox.getChildren().clear();
+        timePickersVBox.getChildren().addAll(generateHBoxers(sliderValue));
     }
 }
