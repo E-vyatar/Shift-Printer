@@ -35,8 +35,8 @@ public class TimePickerSpinner extends Spinner<String> {
 
         // Set the value factory to the Spinner
         setValueFactory(valueFactory);
-//        getEditor().setPrefColumnCount(5);
-//        setEditable(true);
+        getEditor().setPrefColumnCount(5);
+        setEditable(true);
 
         // Add event handler for key pressed to validate input
 //        getEditor().addEventFilter(KeyEvent.KEY_TYPED, event -> {

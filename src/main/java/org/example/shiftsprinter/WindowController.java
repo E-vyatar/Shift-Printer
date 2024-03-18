@@ -70,18 +70,18 @@ public class WindowController {
         // text field
         // set initial value
         numDaysTextField.setText(String.valueOf(SLIDER_VALUE));
-        // define allowed input
-        TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
-            String newText = change.getControlNewText();
-            if (newText.matches("\\d+")) {
-                int value = Integer.parseInt(newText);
-                if (SLIDER_MIN <= value && value <= SLIDER_MAX){
-                    return change;
-                }
-            }
-            return null;
-        });
-        numDaysTextField.setTextFormatter(textFormatter);
+//        // define allowed input
+//        TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
+//            String newText = change.getControlNewText();
+//            if (newText.matches("\\d+")) {
+//                int value = Integer.parseInt(newText);
+//                if (SLIDER_MIN <= value && value <= SLIDER_MAX){
+//                    return change;
+//                }
+//            }
+//            return null;
+//        });
+//        numDaysTextField.setTextFormatter(textFormatter);
         // update slider when text field value change
         numDaysTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             numDaysSlider.setValue(Double.parseDouble(newValue));
