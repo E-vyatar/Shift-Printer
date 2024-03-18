@@ -90,11 +90,14 @@ public class WindowController {
         timePickersVBox.getChildren().addAll(generateHBoxers(SLIDER_VALUE));
     }
 
-    private HBox hBoxer(int offset) {
+    // create time picker
+    private HBox createTimePicker(int offset) {
         TimePickerSpinner timePickerSpinner1 = new TimePickerSpinner(LocalTime.of(9,0));
+        timePickerSpinner1.setMinSize(Spinner.USE_PREF_SIZE, Spinner.USE_PREF_SIZE);
         TimePickerSpinner timePickerSpinner2 = new TimePickerSpinner(LocalTime.of(22,0));
+        timePickerSpinner2.setMinSize(Spinner.USE_PREF_SIZE, Spinner.USE_PREF_SIZE);
 
-        Label dateLabel = new Label(datePicker.getValue().plusDays(offset).format(DateTimeFormatter.ofPattern("dd/MM")));
+        Label dateLabel = new Label(datePicker.getValue().plusDays(offset).format(DateTimeFormatter.ofPattern("dd/MM EEEE")));
         Label startLabel = new Label("from:");
         Label endLabel = new Label("until:");
         dateLabel.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
@@ -119,7 +122,7 @@ public class WindowController {
         List<HBox> res = new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
-            res.add(hBoxer(i));
+            res.add(createTimePicker(i));
         }
 
         return res;

@@ -31,7 +31,10 @@
             </HBox>
             <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="-Infinity" minWidth="-Infinity">
                <content>
-                  <VBox fx:id="timePickersVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
+                  <VBox fx:id="timePickersVBox" alignment="CENTER" spacing="15.0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding></VBox>
                </content>
             </ScrollPane>
          </children>
@@ -41,7 +44,7 @@
       </VBox>
       <VBox alignment="CENTER" spacing="15.0">
          <children>
-             <TextField fx:id="subjectTextField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="307.0" />
+             <TextField fx:id="subjectTextField" minHeight="-Infinity" minWidth="-Infinity" />
              <TextArea fx:id="shiftsTextArea" minHeight="-Infinity" minWidth="-Infinity" />
          </children>
          <padding>
